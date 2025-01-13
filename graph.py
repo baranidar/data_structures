@@ -27,7 +27,7 @@ class graph_with_adjacency_list():
         for vertex, edge in self.adj_list.items():
             print("{} --> {}".format(vertex, edge))
 
-    def graph_search(self, item):
+    def graph_bfs_search(self, item):
         visited = set()
         queue = deque()
         graph_start = self.V[0]
@@ -36,7 +36,7 @@ class graph_with_adjacency_list():
         queue.append(graph_start)
 
         while queue:
-            vertex = queue.pop()
+            vertex = queue.popleft()
             print(vertex)
             for vtx in self.adj_list[vertex]:
                 if vtx[0] == item:
@@ -45,6 +45,23 @@ class graph_with_adjacency_list():
                     queue.append(vtx[0]) 
                     visited.add(vtx[0])
 
+    def graph_dfs_search(self, item):
+        visited = set()
+        stack = []
+        graph_start = self.V[0]
+
+        visited.add(graph_start)
+        stack.append(graph_start)
+
+        while stack:
+            vertex = stack.pop()
+            print(vertex)
+            for vtx in self.adj_list[vertex]:
+                if vtx[0] == item:
+                    return "Item " + item + " found adjacent to "  + vertex
+                if vtx[0] not in stack  and vtx[0] not in visited:
+                    stack.append(vtx[0]) 
+                    visited.add(vtx[0])
 
 graph = graph_with_adjacency_list()
 graph.add_vertex("A")
@@ -65,5 +82,6 @@ graph.add_edge("C", "G", 4)
 graph.add_edge("F", "H")
 graph.add_edge("G", "I")
 graph.display_graph()
-result = graph.graph_search("F")
-print(result)
+result1 = graph.graph_bfs_search("F")
+result2 = graph.graph_dfs_search("I")
+print(result1, result2)
