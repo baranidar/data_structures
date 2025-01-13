@@ -41,7 +41,7 @@ class graph_with_adjacency_list():
             for vtx in self.adj_list[vertex]:
                 if vtx[0] == item:
                     return "Item " + item + " found adjacent to "  + vertex
-                if vtx[0] not in queue:
+                if vtx[0] not in queue  and vtx[0] not in visited:
                     queue.append(vtx[0]) 
                     visited.add(vtx[0])
 
