@@ -27,3 +27,22 @@ def bubble_sort(unsorted_list, unsorted_list_count):
 orig_list = [10,12,3,4,2,6,15,23,2]
 sorted_list = bubble_sort(orig_list, len(orig_list))
 print(sorted_list)
+
+
+#---------better implementation-----------
+#https://github.com/codebasics/data-structures-algorithms-python/blob/master/algorithms/2_BubbleSort/bubble_sort.py
+#breaks after 1st i loop indicating the array is already sorted
+def bubble_sort(elements):
+    size = len(elements)
+
+    for i in range(size-1):
+        swapped = False
+        for j in range(size-1-i):
+            if elements[j] > elements[j+1]:
+                tmp = elements[j]
+                elements[j] = elements[j+1]
+                elements[j+1] = tmp
+                swapped = True
+
+        if not swapped:
+            break
